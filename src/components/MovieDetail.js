@@ -1,4 +1,4 @@
-import './MovieDetail.css'
+
 
 const MovieDetail = () => {
     return(

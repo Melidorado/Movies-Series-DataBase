@@ -1,4 +1,4 @@
-import './Series.css';
+
 
 const Series = () => {
     return(

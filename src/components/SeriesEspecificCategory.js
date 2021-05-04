@@ -1,4 +1,4 @@
-import './SeriesEspecificCategory.css';
+
 
 const SeriesEspecificCategory = () => {
     return(

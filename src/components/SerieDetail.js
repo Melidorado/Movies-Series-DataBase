@@ -1,4 +1,4 @@
-import './SerieDetail.css';
+
 
 const SerieDetail = () => {
     return(

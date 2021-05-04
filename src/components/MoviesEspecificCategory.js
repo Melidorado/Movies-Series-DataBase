@@ -1,4 +1,4 @@
-import './MoviesEspecificCategory.css';
+
 
 const MoviesEspecificCategory = () => {
     return(
