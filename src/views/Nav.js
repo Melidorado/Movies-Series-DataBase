@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import { useState } from 'react';
@@ -7,24 +7,40 @@ const NavBar = styled.nav`
     background-color: ${props => props.theme.colors.nav};
     color: ${props => props.theme.colors.text} !important;
     height: auto;
-    padding: 10px 20px;
+    padding: 10px 25px;
     font-weight: 300;
     display: flex;
     align-items: center;
+    @media (max-width: 649px) {
+        padding: 10px 35px;
+    }
 `
 const NavItems = styled.ul`
     display: flex;
     list-style: none;
+    padding: 0;
 `
 const Item = styled.li`
     margin-right: 20px;
     font-size: 20px;
+    @media (max-width: 649px) {
+        font-size: 16px;
+    }
+    @media (max-width: 399px) {
+        font-size: 12px;
+    }
 `
 
 const SearchContainer = styled.form`
     width: 25%;
     display: flex;
     position: relative;
+    @media (max-width: 649px) {
+        width: 40%;
+    }
+    @media (max-width: 399px) {
+        width: 50%;
+    }
 `
 
 const Search = styled.input`
@@ -55,20 +71,28 @@ const IconContainer = styled.div`
 `
 
 const Nav = () => {
+
+    let history = useHistory();
+
     const [ value, setValue ] = useState('')
 
     const handleChange = e => {
         setValue(e.target.value)
     }
 
+    console.log(value)
+
     const handleSubmit = e => {
         e.preventDefault()
+        history.push(`/search/multi/${value}`);
+        setValue("");
+
     }
 
     return(
         <NavBar>
             <NavItems>
-                <Item><Link to="/home">Inicio</Link></Item>
+                <Item><Link to="/">Inicio</Link></Item>
                 <Item> <Link to="/movies">Peliculas</Link></Item>
                 <Item><Link to="/series">Series</Link></Item>
             </NavItems>

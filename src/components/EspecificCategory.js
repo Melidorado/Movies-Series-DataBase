@@ -1,17 +1,26 @@
+import { useParams } from "react-router-dom";
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import Card from './Card';
+import { useEffect, useState } from 'react';
 
-const TrendingContainer = styled.section`
+const CategoryContainer = styled.div`
+    background-color: ${props => props.theme.colors.background};
+    width: 100vw;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+const ResultsContainer = styled.section`
     display: flex;
     flex-direction: column;
-    padding: 60px 40px 10px;
+    padding: 10px;
     max-width: 1400px;
     height: auto;
 `
 
-const SectionTitle = styled.h2`
+const SearchTitle = styled.h2`
     color: ${props => props.theme.colors.text};
     text-align: left;
     margin-bottom: 30px;
@@ -19,19 +28,24 @@ const SectionTitle = styled.h2`
         font-size: 20px;
     }
     @media (max-width: 399px) {
-        font-size: 15px;
+        font-size: 18px;
     }
 `
-const ItemsContainer = styled.div`
-    display: flex;
+const Results = styled.div`
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 `
 
-const ShowInfoFromAPI = ({category, media_type}) => {
+const EspecificCategory = () => {
 
     const [ items, setItems ] = useState([])
+    let params = useParams();
+    let category = params.category
+    let media_type = params.media
 
+    console.log(params)
     useEffect(() => {
 
         const baseURL = "https://api.themoviedb.org/3"
@@ -48,29 +62,6 @@ const ShowInfoFromAPI = ({category, media_type}) => {
         .then (res => res.json())
         .then (data => setItems(data.results))
     },[category, media_type])
-
-    let windowSize = window.innerWidth;
-    let index = 0;
-
-    const defineIndex = (windowSize) => {
-        if (windowSize >= 1300){
-            return (index = 5);
-        }
-        else if (windowSize >= 1000){
-            return (index = 4);
-        }
-        else if (windowSize >= 650){
-            return (index = 3);
-        }
-        else if (windowSize >= 400){
-            return (index = 2);
-        }
-        else {
-            return (index = 1);
-        }
-    }
-
-    defineIndex(windowSize)
 
     const createTitle = () => {
         return media_type === "movie"
@@ -103,24 +94,21 @@ const ShowInfoFromAPI = ({category, media_type}) => {
 
 
     return(
-       
-        <TrendingContainer>
-            <SectionTitle>
-                <Link to={`/${media_type}/${category}`}>{title}</Link>
-            </SectionTitle>
-            <ItemsContainer>
-                {items.map( (item, i) => 
-                    i < index && 
-                    <Card 
-                    title={item.title}
-                    photo={item.poster_path}
-                    key={item.id}
-                    />
-                    )}
-            </ItemsContainer>
-        </TrendingContainer>
-    
+        <CategoryContainer>
+            <ResultsContainer>
+                <SearchTitle>{title}</SearchTitle>
+                <Results>
+                    {items.map( item =>
+                        <Card
+                        title={item.title || item.name}
+                        photo={item.poster_path || item.profile_path}
+                        key={item.id}
+                        />
+                        )}
+                </Results>
+            </ResultsContainer>
+        </CategoryContainer>
     )
 }
 
-export default ShowInfoFromAPI;
+export default EspecificCategory;
