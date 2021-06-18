@@ -45,7 +45,7 @@ const EspecificCategory = () => {
     let category = params.category
     let media_type = params.media
 
-    console.log(params)
+    
     useEffect(() => {
 
         const baseURL = "https://api.themoviedb.org/3"

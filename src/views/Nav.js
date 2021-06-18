@@ -80,7 +80,6 @@ const Nav = () => {
         setValue(e.target.value)
     }
 
-    console.log(value)
 
     const handleSubmit = e => {
         e.preventDefault()
