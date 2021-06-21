@@ -1,3 +1,4 @@
+// este archivo no se usa. borralo asi no confunde 
 export const theme = () => {
     colours:{
         primary: "#0f171e";

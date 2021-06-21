@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Card from './Card';
+import EspecificCategory from './EspecificCategory';
 
 const TrendingContainer = styled.section`
     display: flex;
@@ -29,7 +30,8 @@ const ItemsContainer = styled.div`
 `
 
 const ShowInfoFromAPI = ({category, media_type}) => {
-
+// este componente esta muuuuuy parecido a EspecificCategory. Pensa como mejorarlo para que no sea 
+// tan repetitivo. Que ambos llamen al mismo componente? Hooks custom? variables y funciones importadas? Quiza todas a la vez
     const [ items, setItems ] = useState([])
 
     useEffect(() => {

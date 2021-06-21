@@ -48,6 +48,7 @@ const EspecificCategory = () => {
     
     useEffect(() => {
 
+        // eventualmente va a valer la pena mover esto a un archivo de variables, ya que lo vas a usar en varios archivos
         const baseURL = "https://api.themoviedb.org/3"
         const apiKey = "?api_key=6ab244ede1af8b98e83dbd19d33c2e13"
         const language = "&language=en-US"
@@ -58,6 +59,7 @@ const EspecificCategory = () => {
             : `/${media_type}/${category}`
         }
         
+        // mismo aca: este fetch se va a repetir en distintos lugares de tu codigo, asi que vale la pena hacer un custom hook
         fetch(`${baseURL + chekOrder() + apiKey + language}`)
         .then (res => res.json())
         .then (data => setItems(data.results))
@@ -70,6 +72,8 @@ const EspecificCategory = () => {
     }
 
     const createCategory = () => {
+
+        // Podemos reemplazar estos largos ifs por objetos. Leete esto: https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
         if (category === "trending") {
             return "que son Tendencia"
         }

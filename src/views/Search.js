@@ -13,7 +13,9 @@ const SearchContainer = styled.div`
 `
 
 const Search = () => {
+    // deberian ser const, no let
     let params = useParams();
+    // privilegia desestructurar: const { query } = params
     let query = params.query
     
     return(
